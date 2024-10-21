@@ -50,13 +50,14 @@ function showDocument(string $partTemplate,array $data = []) : void
  */
 function writeErrorLog(string $message) : void
 {
-    $handle = fopen(LOG_FILE, 'a');//write and create if not exists
-    if(!$handle){
-        //TODO if not opened
-        return;
-    }
-    fwrite($handle, $message . PHP_EOL);
-    fclose($handle);
+//    $handle = fopen(LOG_FILE, 'a');//write and create if not exists
+//    if(!$handle){
+//        //TODO if not opened
+//        return;
+//    }
+//    fwrite($handle, $message . PHP_EOL);
+//    fclose($handle);
+    file_put_contents(LOG_FILE, $message . PHP_EOL, FILE_APPEND);
 }
 
 /**
@@ -76,7 +77,6 @@ function readErrorLogs() : array
     $messages = [];
     while (!feof($handle)){
         $str = fgets($handle);
-        var_dump($str);
         if($str){
             $messages[] = $str;
         }
